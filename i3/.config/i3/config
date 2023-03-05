@@ -225,4 +225,4 @@ bindsym $mod+Shift+period exec systemctl suspend
 
 bindsym $mod+Control+h move workspace to output left
 bindsym $mod+Control+l move workspace to output right
-exec --nostartup-id xrandr --output HDMI-1-1 --auto --left-of eDP-1
+exec --no-startup-id xrandr --output HDMI-1-1 --auto --left-of eDP-1
