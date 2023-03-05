@@ -8,5 +8,5 @@ do
 done
 popd
 
-./stow
-popd
+#./stow
+#popd
