@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+addToPath /usr/local/go/bin
+addToPath $GOPATH/bin
+addToPath $HOME/.yarn/bin
+addToPath $HOME/.cargo/bin
+addToPath $HOME/.rustup
+
+# ccache
+addToPathFront /usr/lib/ccache
