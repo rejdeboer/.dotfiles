@@ -103,3 +103,5 @@ source $ZSH/oh-my-zsh.sh
 source ~/.zsh_profile
 
 [ -f ~/.cargo/env ] && source $HOME/.cargo/env
+
+source ~/.zsh_env
