@@ -1,68 +1,136 @@
-let mapleader=" "
-nnoremap \e :e ~/.ideavimrc<CR>
-nnoremap \r :action IdeaVim.ReloadVimRc.reload<CR>
-
-map <C-d> <C-d>zz
-map <C-u> <C-u>zz
-
-set relativenumber
-set clipboard+=unnamed
-set clipboard+=ideaput
-
-nnoremap <c-t> :action ActivateTerminalToolWindow<CR>
-nnoremap <leader>t :action Terminal.OpenInTerminal<CR>
-nnoremap <c-z> :action ToggleDistractionFreeMode<CR>
-
-""" Editing source code
-set ideajoin
+set number relativenumber
 set idearefactormode=keep
+set ideajoin
+set surround
+set easymotion
+set showmode
+set showcmd
+set incsearch
+set highlightedyank
+set which-key
+
+let mapleader = " "
+
+noremap <Esc> <nop>
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
+nnoremap <C-j> :m +1<CR>
+nnoremap <C-k> :m -2<CR>
+inoremap <C-j> <Esc>:m +1<CR>gi
+inoremap <C-k> <Esc>:m -2<CR>gi
+
+nmap <leader>P "+P
+vmap <leader>d "+d
+nmap <leader>y "+yy
+nmap <leader>p "+p
+vmap <leader>p "+p
+vmap <leader>P "+P
+nmap <leader>Y gg"+yG
+
+nmap <C-d> <C-d>zz
+nmap <C-u> <C-u>zz
+vmap <C-d> <C-d>zz
+vmap <C-u> <C-u>zz
+
+nmap <C-h> <action>(PreviousTab)
+nmap <C-l> <action>(NextTab)
+nmap <leader>bd <action>(CloseEditor)
+nmap <leader>i <action>(Generate)
+nmap <leader>m <action>(Git.Menu)
+nmap <leader>s <action>(QuickChangeScheme)
+nmap <leader>/ <action>(ShowErrorDesiption)
+nmap <leader>e <action>(GotoNextError)
+nnoremap <leader><leader> <C-Tab>
+
+set NERDTree
+let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapJumpParent='h'
+
+map <leader>c <action>(CommentByLineComment)
+
+" Refactoring
+map <leader>rn <Action>(RenameElement)
+map <leader>rm <Action>(ExtractMethod)
+map <leader>rv <Action>(IntroduceVariable)
+map <leader>rf <Action>(IntroduceField)
+map <leader>rs <Action>(ChangeSignature)
+map <leader>rr <Action>(Refactorings.QuickListPopupAction)
+
+" Go to code
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gy <Action>(GotoTypeDeclaration)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gu <Action>(ShowUsages)
+nmap <leader>gt <Action>(GotoTest)
+nmap <leader>gf <Action>(Back)
+nmap <leader>gb <Action>(Forward)
+
+map <leader>si <action>(ShowIntentionActions)
+map <leader>sa <action>(GotoAction)
+map <leader>ss <action>(SearchEverywhere)
+map <leader>sr <action>(RecentFiles)
+map <leader>sf <action>(GotoFile)
+
+" Open NERDTree (use q to exit)
+map <leader>x :NERDTreeToggle<CR>
+map <leader>v :NERDTreeFocus<CR>
+
+" Display options
+map <leader>dd <action>(ToggleDistractionFreeMode)
+map <leader>dz <action>(ToggleZenMode)
+map <leader>df <action>(ToggleFullScreen)
+map <leader>dp <action>(TogglePresentationMode)
+
+" Window splits
+map <leader>wv <Action>(SplitVertically)
+map <leader>ws <Action>(SplitHorizontally)
+map <leader>wu <Action>(Unsplit)
+map <leader>wm <Action>(MoveEditorToOppositeTabGroup)
+
+" Pane navigation
+nnoremap <A-h> <C-w>h
+nnoremap <A-l> <C-w>l
+nnoremap <A-k> <C-w>k
+nnoremap <A-j> <C-w>j
+
+" Easy visual indentation
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <leader>gc :action CommentByLineComment<CR>
-vnoremap gc :action CommentByLineComment<CR>
+" Git windows
+map <leader>gc <Action>(CheckinProject)
+map <leader>gs <Action>(ActivateVersionControlToolWindow)
+map <leader>gb <Action>(Git.Branches)
 
-nnoremap <leader>r :action Refactorings.QuickListPopupAction<CR>
-nnoremap <Leader>=  :action ReformatCode<CR>
-nnoremap <leader>o :action OptimizeImports<CR>
+" Close active tab
+map <leader>q <action>(CloseContent)
 
-sethandler <c-j> a:vim
-sethandler <c-k> a:vim
-nnoremap <c-h> <c-w>h
-nnoremap <c-l> <c-w>l
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
-nnoremap <s-TAB> :action PreviousTab<CR>
-nnoremap <TAB> :action NextTab<CR>
-nnoremap <Leader>en :action EditSourceInNewWindow<CR>
-nnoremap <Leader>n :action NextWindow<CR>
-nnoremap <Leader>q :action CloseContent<CR>
-nnoremap <Leader>qa :action CloseAllEditors<CR>
+" build and debug actions
+nnoremap <Leader>Bp :action ViewBreakpoints<CR>
+nnoremap <Leader>bP :action EditBreakpoint<CR>
+nnoremap <Leader>bp :action ToggleLineBreakpoint<CR>
+nnoremap <Leader>bB :action Compile<CR>
+nnoremap <Leader>bb :action CompileDirty<CR>
+nnoremap <Leader>bm :action Maven.ExecuteGoal<CR>
+nnoremap <Leader>bM :action ActivateMavenProjectsToolWindow<CR>
+nnoremap <Leader>bx :action RunClass<CR>
+nnoremap <Leader>bX :action DebugClass<CR>
+nnoremap <Leader>br :action Run<CR>
+nnoremap <Leader>bR :action ChooseRunConfiguration<CR>
+nnoremap <Leader>bd :action Debug<CR>
+nnoremap <Leader>bD :action ChooseDebugConfiguration<CR>
+nnoremap <Leader>bc :action CreateRunConfiguration<CR>
+nnoremap <Leader>bC :action editRunConfigurations<CR>
 
-""" Searching and Source Code Navigation
-set incsearch
+" Custom find replace
+vnoremap <Leader>fr :action SelectAllOccurrences<CR>c
+vnoremap <Leader>fR :action ReplaceInPath<CR>
+nnoremap <C-c> :action EditorToggleColumnMode<CR><Esc>
+map <leader>ff <action>(FindInPath)
 
-nnoremap <c-/> :action FindInPath<CR>
-nnoremap <c-a> :action GotoAction<CR>
-nnoremap <c-f> :action GotoFile<CR>
-nnoremap <leader>u :action FindUsages<CR>
-nnoremap <leader>s :action GotoRelated<CR>
-nnoremap <leader>h :action CallHierarchy<CR>
-nnoremap <leader>b :action ShowNavBar<CR>
-nnoremap <c-s> :action FileStructurePopup<CR>
-nnoremap <c-o> :action GotoSymbol<CR>
-nnoremap gc :action GotoClass<CR>
-nnoremap gi :action GotoImplementation<CR>
-nnoremap gd :action GotToDeclaration<CR>
-nnoremap gp :action GotToSuperMethod<CR>
-nnoremap gt :action GotoTest<CR>
-nnoremap gb :action Back<CR>
-nnoremap gf :action Forward<CR>
+map <leader>l <action>(ReformatCode)
 
-""" Tool windows
-nnoremap <c-p> :action JumpToLastWindow<CR>
-nnoremap <c-x> :action HideAllWindows<CR>
+map <leader>a <action>(PinActiveEditorTab)
 
-""" Running and Debugging
-nnoremap ,r :action ContextRun<CR>
-nnoremap ,c :action RunClass<CR>
+map <leader>t <action>(ActivateTerminalToolWindow)
