@@ -112,7 +112,7 @@ nnoremap <Leader>bP :action EditBreakpoint<CR>
 nnoremap <Leader>bp :action ToggleLineBreakpoint<CR>
 nnoremap <Leader>bB :action Compile<CR>
 nnoremap <Leader>bb :action CompileDirty<CR>
-nnoremap <Leader>bm :action Maven.ExecuteGoal<CR>
+nmap <leader>bm <Action>(Maven.ExecuteGoal)<Action>(Cargo.RefreshCargoProject)
 nnoremap <Leader>bM :action ActivateMavenProjectsToolWindow<CR>
 nnoremap <Leader>bx :action RunClass<CR>
 nnoremap <Leader>bX :action DebugClass<CR>
@@ -126,7 +126,7 @@ nnoremap <Leader>bC :action editRunConfigurations<CR>
 " Custom find replace
 vnoremap <Leader>fr :action SelectAllOccurrences<CR>c
 vnoremap <Leader>fR :action ReplaceInPath<CR>
-nnoremap <C-c> :action EditorToggleColumnMode<CR><Esc>
+" nnoremap <C-c> :action EditorToggleColumnMode<CR><Esc>
 map <leader>ff <action>(FindInPath)
 
 map <leader>l <action>(ReformatCode)
